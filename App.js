@@ -1,12 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import DatePicker from './DatePicker'
 
 export default function App() {
+  const [aDate, setDate] = useState(new Date());
+
+  dateCallback = (selectedDate) => {
+    const currentDate = selectedDate || aDate;
+    setDate(currentDate);
+    console.log("Selected date => " + currentDate)
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text>Get the date, by clicking on the Get Calender button</Text>
+      <DatePicker
+        selectedDateCallback={dateCallback}
+      />
+      <Text> Selected Date : {aDate.toDateString()} </Text>
     </View>
   );
 }
